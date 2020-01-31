@@ -575,6 +575,7 @@ MonoBehaviour:
     m_NumColorKeys: 5
     m_NumAlphaKeys: 2
   LightRotator: {fileID: 895544116}
+  Resources: {fileID: 11400000, guid: a6f1a417d1e44df41845234c4e7825df, type: 2}
   DayNightSpeed: 0.04
 --- !u!4 &1951183024
 Transform:

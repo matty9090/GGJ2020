@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class Game : MonoBehaviour
 {
-    [SerializeField] private Camera MainCamera;
-    [SerializeField] private Light DirectionalLight;
-    [SerializeField] private Gradient DayNightGradient;
-    [SerializeField] private GameObject LightRotator;
+    [SerializeField] private Camera MainCamera = null;
+    [SerializeField] private Light DirectionalLight = null;
+    [SerializeField] private Gradient DayNightGradient = null;
+    [SerializeField] private GameObject LightRotator = null;
+    [SerializeField] private Resources Resources = null;
     [SerializeField] private float DayNightSpeed;
 
     private float DayNightT = 0.0f;
@@ -30,8 +31,6 @@ public class Game : MonoBehaviour
 
             if (DayNightT > 1.0f)
                 DayNightT = 0.0f;
-
-            Debug.Log(DayNightT);
 
             yield return null;
         }
