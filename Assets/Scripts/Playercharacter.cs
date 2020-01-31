@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class Playercharacter : MonoBehaviour
 {
-    [SerializeField] Camera Cam;
-    [SerializeField] float MoveSpeed;
-    [SerializeField] Vector2 RotationSpeeds;
-    [SerializeField] float MinYRotation;
-    [SerializeField] float MaxYRotation;
+    [SerializeField] Camera Cam = null;
+    [SerializeField] float MoveSpeed = 50.0f;
+    [SerializeField] Vector2 RotationSpeeds = new Vector2(500.0f, 200.0f);
+    [SerializeField] float MinYRotation = -45.0f;
+    [SerializeField] float MaxYRotation = 45.0f;
 
     float yRotation = 0;
 

@@ -9,7 +9,7 @@ public class Game : MonoBehaviour
     [SerializeField] private Gradient DayNightGradient = null;
     [SerializeField] private GameObject LightRotator = null;
     [SerializeField] private Resources Resources = null;
-    [SerializeField] private float DayNightSpeed;
+    [SerializeField] private float DayNightSpeed = 0.04f;
 
     private float DayNightT = 0.0f;
 
@@ -31,6 +31,8 @@ public class Game : MonoBehaviour
 
             if (DayNightT > 1.0f)
                 DayNightT = 0.0f;
+
+            Resources.SubtractFromMeter(EMeter.Water, 0.1f);
 
             yield return null;
         }

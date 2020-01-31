@@ -12,6 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f380cffa7c738df43be8d10e236f518c, type: 3}
   m_Name: Resources
   m_EditorClassIdentifier: 
+  MaxWater: 1000
+  MaxOxygen: 100
+  MeterChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
   ResourcesChangedEvent:
     m_PersistentCalls:
       m_Calls: []
