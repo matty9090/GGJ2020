@@ -61,9 +61,12 @@ public class HarvestableObject : MonoBehaviour
 
     private void OnDestroy()
     {
-        ParticleSystem explosionEffect = Instantiate(HarvestedEffect) as ParticleSystem;
-        explosionEffect.transform.position = transform.position;
-        explosionEffect.Play();
-        Destroy(explosionEffect.gameObject,explosionEffect.main.startLifetime.constant);
+        if (HarvestedEffect != null)
+        {
+            ParticleSystem explosionEffect = Instantiate(HarvestedEffect) as ParticleSystem;
+            explosionEffect.transform.position = transform.position;
+            explosionEffect.Play();
+            Destroy(explosionEffect.gameObject, explosionEffect.main.startLifetime.constant);
+        }
     }
 }
