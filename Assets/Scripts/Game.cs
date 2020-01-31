@@ -8,9 +8,9 @@ public class Game : MonoBehaviour
     [SerializeField] private Light DirectionalLight = null;
     [SerializeField] private Gradient DayNightGradient = null;
     [SerializeField] private GameObject LightRotator = null;
-    [SerializeField] private Resources Resources = null;
     [SerializeField] private float DayNightSpeed = 0.04f;
 
+    public Resources Resources = null;
     private float DayNightT = 0.0f;
 
     void Start()
