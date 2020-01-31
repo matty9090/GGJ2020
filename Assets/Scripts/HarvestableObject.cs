@@ -7,6 +7,7 @@ public class HarvestableObject : MonoBehaviour
     [SerializeField] float HarvestRange = 10;
     [SerializeField] EResource ResourceType = EResource.Dirt;
     [SerializeField] int ResourceAmount = 5;
+    [SerializeField] ParticleSystem HarvestedEffect = null;
 
     GameObject PlayerChar;
     Canvas ButtonCanvas;
@@ -31,7 +32,6 @@ public class HarvestableObject : MonoBehaviour
                 if (Input.GetKeyDown(KeyCode.E))
                 {
                     GameObject.Find("Game").GetComponent<Game>().Resources.AddResources(ResourceType,ResourceAmount);
-                    Destroy(this.gameObject, 2.0f); //change to animation time
                     StartCoroutine(Shrink(2.0f));
                     IsHarvesting = true;
                 }
@@ -47,7 +47,7 @@ public class HarvestableObject : MonoBehaviour
     {
         Vector3 basePosition = transform.position;
         float scaleStep = 0;
-        while (true)
+        while (scaleStep < 0.5f) 
         {
             scaleStep += Time.deltaTime / scalingDuration;
             float newScale = 1 - scaleStep;
@@ -56,5 +56,14 @@ public class HarvestableObject : MonoBehaviour
 
             yield return null;
         }
+        Destroy(this.gameObject); 
+    }
+
+    private void OnDestroy()
+    {
+        ParticleSystem explosionEffect = Instantiate(HarvestedEffect) as ParticleSystem;
+        explosionEffect.transform.position = transform.position;
+        explosionEffect.Play();
+        Destroy(explosionEffect.gameObject,explosionEffect.main.startLifetime.constant);
     }
 }
