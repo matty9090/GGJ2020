@@ -93,7 +93,6 @@ public class Game : MonoBehaviour
         }
 
         SceneManager.LoadScene("GameOver");
-        vig.intensity.Override(0.0f);
     }
 
     private IEnumerator DayNightCycle()
