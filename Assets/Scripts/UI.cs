@@ -5,13 +5,12 @@ using UnityEngine.UI;
 
 public class UI : MonoBehaviour
 {
-    [SerializeField] private Resources Resources;
+    [SerializeField] private Resources Resources = null;
     [SerializeField] private Transform MeterWater = null;
     [SerializeField] private Transform MeterOxygen = null;
     [SerializeField] private TMPro.TextMeshProUGUI TxtSoil = null;
     [SerializeField] private TMPro.TextMeshProUGUI TxtDirt = null;
     [SerializeField] private TMPro.TextMeshProUGUI TxtMetal = null;
-
 
     private void Start()
     {
