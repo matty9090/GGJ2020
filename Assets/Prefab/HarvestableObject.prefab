@@ -201,6 +201,7 @@ GameObject:
   - component: {fileID: 1002121622987542939}
   - component: {fileID: 5410371887388485802}
   - component: {fileID: 4407102662424369010}
+  - component: {fileID: 2845199914653169637}
   m_Layer: 0
   m_Name: HarvestableObject
   m_TagString: Untagged
@@ -283,3 +284,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2845199914653169637
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7080298926098185035}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8ccc160651053d44b74239b0e183a39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HarvestRange: 10
+  ResourceType: 1
+  ResourceAmount: 5
