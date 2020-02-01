@@ -1,12 +1,25 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Machine : MonoBehaviour
 {
-    private bool _IsBroken = false;
+    [SerializeField] float FixRadius = 10;
+    [SerializeField] EResource ResourceType = EResource.Metal;
+    [SerializeField] int ResourceCost = 10;
 
+
+    private bool _IsBroken = true;
+
+    GameObject PlayerChar = null;
     ParticleSystem[] particlesSystems = null;
+    Game game = null;
+
+    //texts canvas'
+    Canvas ButtonCanvas = null;
+    [SerializeField] TMPro.TextMeshProUGUI CostText = null;
+
 
     public bool IsBroken
     {
@@ -21,18 +34,40 @@ public class Machine : MonoBehaviour
         }
     }
 
+    
 
     // Start is called before the first frame update
     void Start()
     {
+        PlayerChar = GameObject.Find("Character").gameObject;
         particlesSystems = GetComponentsInChildren<ParticleSystem>();
+        game = GameObject.Find("Game").GetComponent<Game>();
+        ButtonCanvas = transform.Find("ButtonCanvas").GetComponent<Canvas>();
+        CostText.text = "Metal: " + ResourceCost.ToString(); 
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.Q))
-            IsBroken = !IsBroken;
+        if(IsBroken)
+        {
+            if (Vector3.Distance(PlayerChar.transform.position, transform.position) < FixRadius)
+            {
+                ButtonCanvas.gameObject.SetActive(true);
+                if(game.Resources.GetRes(ResourceType) > ResourceCost)
+                {
+                    CostText.color = Color.green;
+                    if (Input.GetKeyDown(KeyCode.E))
+                    {
+                        IsBroken = !IsBroken;
+                    }
+                }
+                else
+                    CostText.color = Color.red;
+            }
+            else
+                ButtonCanvas.gameObject.SetActive(false);
+        }  
     }
 
     void StartParticles()
