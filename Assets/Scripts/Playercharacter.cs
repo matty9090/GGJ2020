@@ -56,8 +56,6 @@ public class Playercharacter : MonoBehaviour
 
         CamDummy.transform.localEulerAngles = new Vector3(-yRotation, CamLocation.transform.localEulerAngles.y, CamLocation.transform.localEulerAngles.z);
 
-        
-
         // Set camera position
         Cam.transform.position = CamLocation.transform.position;
         Cam.transform.rotation = CamLocation.transform.rotation;
