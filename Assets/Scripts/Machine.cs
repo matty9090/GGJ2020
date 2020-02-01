@@ -30,7 +30,10 @@ public class Machine : MonoBehaviour
             if (_IsBroken)
                 StartParticles();
             else
+            {
                 StopParticles();
+                ButtonCanvas.gameObject.SetActive(false);
+            }
         }
     }
 
@@ -54,12 +57,13 @@ public class Machine : MonoBehaviour
             if (Vector3.Distance(PlayerChar.transform.position, transform.position) < FixRadius)
             {
                 ButtonCanvas.gameObject.SetActive(true);
-                if(game.Resources.GetRes(ResourceType) > ResourceCost)
+                if(game.Resources.GetRes(ResourceType) >= ResourceCost)
                 {
                     CostText.color = Color.green;
                     if (Input.GetKeyDown(KeyCode.E))
                     {
                         IsBroken = !IsBroken;
+                        game.Resources.SubtractResources(ResourceType, ResourceCost);
                     }
                 }
                 else

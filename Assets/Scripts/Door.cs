@@ -4,27 +4,70 @@ using UnityEngine;
 
 public class Door : MonoBehaviour
 {
+    [SerializeField] private TMPro.TextMeshProUGUI Text = null;
     [SerializeField] private float DoorSpeed = 20.0f;
     [SerializeField] private float DoorHeight = 6.0f;
+    [SerializeField] private float TipRange = 10.0f;
+    [SerializeField] EResource ResourceType = EResource.Metal;
+    [SerializeField] int ResourceCost = 10;
 
-    bool HasExited = false;
+    bool HasExited = false, IsFixed = false;
     private Vector3 RestPos = Vector3.zero;
+    GameObject PlayerChar = null;
+    Game mGame;
 
     private void Start()
     {
         RestPos = transform.position;
+        PlayerChar = GameObject.Find("Character").gameObject;
+        mGame = GameObject.Find("Game").GetComponent<Game>();
+        Text.text += "\nMetal: " + ResourceCost.ToString();
+    }
+
+    private void Update()
+    {
+        if (Vector3.Distance(PlayerChar.transform.position, transform.position) < TipRange && !IsFixed)
+        {
+            var screen = Camera.main.WorldToScreenPoint(transform.position);
+            Text.transform.position = screen;
+            Text.enabled = true;
+
+            if (mGame.Resources.GetRes(ResourceType) >= ResourceCost)
+            {
+                Text.color = Color.green;
+
+                if (Input.GetKeyDown(KeyCode.E))
+                {
+                    IsFixed = true;
+                    mGame.Resources.SubtractResources(ResourceType, ResourceCost);
+                    StartCoroutine(OpenDoor());
+                }
+            }
+            else
+                Text.color = Color.red;
+        }
+        else
+            Text.enabled = false;
     }
 
     private void OnTriggerEnter(Collider other)
     {
         HasExited = false;
-        StartCoroutine(OpenDoor());
+
+        if (IsFixed)
+        {
+            StartCoroutine(OpenDoor());
+        }
     }
 
     private void OnTriggerExit(Collider other)
     {
         HasExited = true;
-        StartCoroutine(CloseDoor());
+
+        if (IsFixed)
+        {
+            StartCoroutine(CloseDoor());
+        }
     }
 
     private IEnumerator OpenDoor()
