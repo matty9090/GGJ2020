@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
+using UnityEngine.Rendering.PostProcessing;
 
 public class Game : MonoBehaviour
 {
@@ -28,6 +30,13 @@ public class Game : MonoBehaviour
         SwitchToMainGame();
         StartCoroutine(DayNightCycle());
 
+        Vignette vig;
+        var pp = MainCamera.GetComponent<PostProcessVolume>();
+        pp.sharedProfile.TryGetSettings(out vig);
+        vig.intensity.Override(0.0f);
+        vig.smoothness.Override(1.0f);
+        vig.roundness.Override(1.0f);
+
         DayNumber = 1;
     }
 
@@ -39,6 +48,11 @@ public class Game : MonoBehaviour
                 SwitchToOverview();
             else
                 SwitchToMainGame();
+        }
+
+        if (Input.GetKeyUp(KeyCode.G))
+        {
+            StartCoroutine(GameOverSequence());
         }
     }
 
@@ -58,6 +72,24 @@ public class Game : MonoBehaviour
         OverviewUI.enabled = true;
         MainCamera.enabled = false;
         OverviewCamera.enabled = true;
+    }
+
+    private IEnumerator GameOverSequence()
+    {
+        Vignette vig;
+
+        var pp = MainCamera.GetComponent<PostProcessVolume>();
+        pp.sharedProfile.TryGetSettings(out vig);
+        vig.enabled.Override(true);
+
+        while (vig.intensity < 1.0f)
+        {
+            vig.intensity.Override(vig.intensity.value + Time.deltaTime * 0.1f);
+            yield return null;
+        }
+
+        SceneManager.LoadScene("GameOver");
+        vig.intensity.Override(0.0f);
     }
 
     private IEnumerator DayNightCycle()
