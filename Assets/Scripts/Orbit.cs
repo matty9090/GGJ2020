@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Orbit : MonoBehaviour
 {
+    [SerializeField] float Speed = 1;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -13,6 +15,6 @@ public class Orbit : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.Rotate(Vector3.up, 1 * Time.deltaTime);
+        transform.Rotate(Vector3.up, Speed * Time.deltaTime);
     }
 }
