@@ -69,12 +69,27 @@ public class Resources : ScriptableObject
     public void AddToMeter(EMeter meter, float amount)
     {
         mMeters[meter] += amount;
+        mMeters[meter] = Mathf.Min(mMeters[meter], GetCap(meter));
         MeterChangedEvent.Invoke();
     }
 
     public void SubtractFromMeter(EMeter meter, float amount)
     {
         mMeters[meter] -= amount;
+        mMeters[meter] = Mathf.Max(mMeters[meter], 0.0f);
         MeterChangedEvent.Invoke();
+    }
+
+    public float GetCap(EMeter meter)
+    {
+        float cap = 0.0f;
+
+        switch (meter)
+        {
+            case EMeter.Water: cap = MaxWater; break;
+            case EMeter.Oxygen: cap = MaxOxygen; break;
+        }
+
+        return cap;
     }
 }

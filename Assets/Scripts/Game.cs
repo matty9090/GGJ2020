@@ -14,7 +14,10 @@ public class Game : MonoBehaviour
     [SerializeField] private Light DirectionalLight = null;
     [SerializeField] private Gradient DayNightGradient = null;
     [SerializeField] private GameObject LightRotator = null;
+    [SerializeField] private InsideTracker Tracker = null;
     [SerializeField] private float DayNightSpeed = 0.04f;
+    [SerializeField] private float OxygenReplenishSpeed = 0.1f;
+    [SerializeField] private float OxygenDepletionSpeed = 0.05f;
     
     public Resources Resources = null;
     public int DayNumber { get; private set; }
@@ -58,6 +61,8 @@ public class Game : MonoBehaviour
         {
             StartCoroutine(GameOverSequence());
         }
+
+        Resources.AddToMeter(EMeter.Water, Tracker.IsInside ? OxygenReplenishSpeed : -OxygenDepletionSpeed);
     }
 
     private void SwitchToMainGame()
@@ -112,8 +117,6 @@ public class Game : MonoBehaviour
                 DayChangedEvent.Invoke();
                 DayNightT = 0.0f;
             }
-
-            Resources.SubtractFromMeter(EMeter.Water, 0.1f);
 
             yield return null;
         }
