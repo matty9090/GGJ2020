@@ -23,11 +23,14 @@ public class Game : MonoBehaviour
     private enum EState { MainGame, Overview };
     private EState mState = EState.MainGame;
 
+    //list of tools picked up
+    List<string> tools;
+
     void Start()
     {
         SwitchToMainGame();
         StartCoroutine(DayNightCycle());
-
+        tools = new List<string>();
         DayNumber = 1;
     }
 
@@ -82,5 +85,10 @@ public class Game : MonoBehaviour
 
             yield return null;
         }
+    }
+
+    public void AddTool (string toolName)
+    {
+        tools.Add(toolName);
     }
 }

@@ -9,8 +9,8 @@ public class HarvestableObject : MonoBehaviour
     [SerializeField] int ResourceAmount = 5;
     [SerializeField] ParticleSystem HarvestedEffect = null;
 
-    GameObject PlayerChar;
-    Canvas ButtonCanvas;
+    GameObject PlayerChar = null;
+    Canvas ButtonCanvas = null;
 
     bool IsHarvesting = false; 
 
