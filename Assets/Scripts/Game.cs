@@ -13,7 +13,7 @@ public class Game : MonoBehaviour
     [SerializeField] private Gradient DayNightGradient = null;
     [SerializeField] private GameObject LightRotator = null;
     [SerializeField] private float DayNightSpeed = 0.04f;
-
+    
     public Resources Resources = null;
     public int DayNumber { get; private set; }
     public UnityEvent DayChangedEvent = new UnityEvent();
