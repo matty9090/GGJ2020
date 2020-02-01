@@ -7,6 +7,7 @@ public class Playercharacter : MonoBehaviour
     [SerializeField] Camera Cam = null;
     [SerializeField] GameObject CamLocation;
     [SerializeField] float MoveSpeed = 50.0f;
+    [SerializeField] float RunMultiplier = 1.4f;
     [SerializeField] Vector2 RotationSpeeds = new Vector2(500.0f, 200.0f);
     [SerializeField] float MinYRotation = -45.0f;
     [SerializeField] float MaxYRotation = 45.0f;
@@ -33,6 +34,16 @@ public class Playercharacter : MonoBehaviour
             vel += transform.right * MoveSpeed * Time.deltaTime;
         else if (Input.GetKey(KeyCode.A))
             vel -= transform.right * MoveSpeed * Time.deltaTime;
+
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            vel *= RunMultiplier;
+            GetComponent<Animator>().SetFloat("SpeedMultiplier", RunMultiplier);
+        }
+        else
+        {
+            GetComponent<Animator>().SetFloat("SpeedMultiplier", 1.0f);
+        }
 
         transform.position += vel;
 

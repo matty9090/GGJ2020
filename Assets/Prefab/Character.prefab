@@ -94,6 +94,7 @@ MonoBehaviour:
   Cam: {fileID: 0}
   CamLocation: {fileID: 2971929132389759399}
   MoveSpeed: 10
+  RunMultiplier: 2
   RotationSpeeds: {x: 500, y: 200}
   MinYRotation: -45
   MaxYRotation: 45
