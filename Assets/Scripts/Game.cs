@@ -25,6 +25,9 @@ public class Game : MonoBehaviour
     private enum EState { MainGame, Overview };
     private EState mState = EState.MainGame;
 
+    //list of tools picked up
+    List<string> tools;
+
     void Start()
     {
         SwitchToMainGame();
@@ -37,6 +40,7 @@ public class Game : MonoBehaviour
         vig.smoothness.Override(1.0f);
         vig.roundness.Override(1.0f);
 
+        tools = new List<string>();
         DayNumber = 1;
     }
 
@@ -114,5 +118,10 @@ public class Game : MonoBehaviour
 
             yield return null;
         }
+    }
+
+    public void AddTool (string toolName)
+    {
+        tools.Add(toolName);
     }
 }

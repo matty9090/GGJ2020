@@ -5,6 +5,7 @@ using UnityEngine;
 public class Playercharacter : MonoBehaviour
 {
     [SerializeField] Camera Cam = null;
+    [SerializeField] GameObject CamDummy;
     [SerializeField] GameObject CamLocation;
     [SerializeField] float MoveSpeed = 50.0f;
     [SerializeField] float RunMultiplier = 1.4f;
@@ -53,7 +54,9 @@ public class Playercharacter : MonoBehaviour
         transform.RotateAround(transform.position, Vector3.up, turnAmountX);
         yRotation = Mathf.Clamp(yRotation, MinYRotation, MaxYRotation);
 
-        CamLocation.transform.localEulerAngles = new Vector3(-yRotation, CamLocation.transform.localEulerAngles.y, CamLocation.transform.localEulerAngles.z);
+        CamDummy.transform.localEulerAngles = new Vector3(-yRotation, CamLocation.transform.localEulerAngles.y, CamLocation.transform.localEulerAngles.z);
+
+        
 
         // Set camera position
         Cam.transform.position = CamLocation.transform.position;
