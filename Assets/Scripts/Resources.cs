@@ -5,8 +5,7 @@ using UnityEngine.Events;
 
 public enum EResource
 {
-    Soil,
-    Dirt,
+    Wood,
     Metal,
     _MaxResources
 }

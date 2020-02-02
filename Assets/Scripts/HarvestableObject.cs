@@ -5,7 +5,7 @@ using UnityEngine;
 public class HarvestableObject : MonoBehaviour
 {
     [SerializeField] float HarvestRange = 10;
-    [SerializeField] EResource ResourceType = EResource.Dirt;
+    [SerializeField] EResource ResourceType = EResource.Metal;
     [SerializeField] int ResourceAmount = 5;
     [SerializeField] ParticleSystem HarvestedEffect = null;
 
