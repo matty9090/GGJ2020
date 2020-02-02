@@ -13,9 +13,12 @@ public class Tool : MonoBehaviour
 
     void Start()
     {
-        PlayerChar = GameObject.Find("Character").gameObject;
+        PlayerChar = GameObject.Find("Character");
         ButtonCanvas = transform.Find("ButtonCanvas").GetComponent<Canvas>();
-        game = GameObject.Find("Game").GetComponent<Game>();
+
+        var tmpGame = GameObject.Find("Game");
+        if(tmpGame )
+            game = tmpGame.GetComponent<Game>();
 
         ButtonCanvas.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = "E to pick up " + ToolName;
     }
@@ -23,18 +26,21 @@ public class Tool : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Vector3.Distance(PlayerChar.transform.position, transform.position) < PickUp)
+        if(PlayerChar)
         {
-            ButtonCanvas.gameObject.SetActive(true);
-            if (Input.GetKeyDown(KeyCode.E))
+            if (Vector3.Distance(PlayerChar.transform.position, transform.position) < PickUp)
             {
-                game.AddTool(ToolName);
-                game.ToolAquiredEvent.Invoke();
-                Destroy(this.gameObject);
+                ButtonCanvas.gameObject.SetActive(true);
+                if (Input.GetKeyDown(KeyCode.E))
+                {
+                    game.AddTool(ToolName);
+                    game.ToolAquiredEvent.Invoke();
+                    Destroy(this.gameObject);
+                }
             }
+            else
+                ButtonCanvas.gameObject.SetActive(false);
         }
-        else
-            ButtonCanvas.gameObject.SetActive(false);
     }
 
     

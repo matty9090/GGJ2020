@@ -49,12 +49,13 @@ public class Machine : MonoBehaviour
         game = GameObject.Find("Game").GetComponent<Game>();
         ButtonCanvas = transform.Find("ButtonCanvas").GetComponent<Canvas>();
         CostText.text += "\nMetal: " + ResourceCost.ToString() + "\nRequires tool: " + RequiredTool;
+        CostText.enabled = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(IsBroken)
+        if(IsBroken && PlayerChar)
         {
             if (Vector3.Distance(PlayerChar.transform.position, transform.position) < FixRadius)
             {
