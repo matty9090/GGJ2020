@@ -11,9 +11,9 @@ public class DomeTriggerTracker : InsideTriggerTracker
 
     private void OnTriggerStay(Collider other)
     {
-        if (!Machines[0].IsBroken)
+        if (Machines.Count > 0 && !Machines[0].IsBroken)
         {
-            Lights.ShouldFlash = true;
+            DomeLights.ShouldFlash = true;
         }
 
         foreach (var machine in Machines)

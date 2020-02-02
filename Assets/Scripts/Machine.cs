@@ -66,6 +66,7 @@ public class Machine : MonoBehaviour
 
                     if (Input.GetKeyDown(KeyCode.E))
                     {
+                        GetComponent<AudioSource>().Play();
                         IsBroken = !IsBroken;
                         game.Resources.SubtractResources(ResourceType, ResourceCost);
                     }

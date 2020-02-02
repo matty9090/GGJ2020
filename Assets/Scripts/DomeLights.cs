@@ -10,7 +10,7 @@ public class DomeLights : MonoBehaviour
     [SerializeField] private Color LightBrokenCol = Color.red;
 
     bool mIsFixed = false;
-    public bool ShouldFlash = false;
+    static public bool ShouldFlash = false;
     private bool LightsOn = false;
     private float FlashTimer = 0.0f;
 

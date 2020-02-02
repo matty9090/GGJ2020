@@ -57,7 +57,6 @@ public class Door : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         HasExited = false;
-
         if (IsFixed)
         {
             StartCoroutine(OpenDoor());
@@ -76,6 +75,7 @@ public class Door : MonoBehaviour
 
     private IEnumerator OpenDoor()
     {
+        GetComponent<AudioSource>().Play();
         while (transform.position.y > RestPos.y - DoorHeight && !HasExited)
         {
             transform.position -= Vector3.up * DoorSpeed * Time.deltaTime;
