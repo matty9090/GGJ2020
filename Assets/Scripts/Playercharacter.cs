@@ -5,8 +5,8 @@ using UnityEngine;
 public class Playercharacter : MonoBehaviour
 {
     [SerializeField] Camera Cam = null;
-    [SerializeField] GameObject CamDummy;
-    [SerializeField] GameObject CamLocation;
+    [SerializeField] GameObject CamDummy = null;
+    [SerializeField] GameObject CamLocation = null;
     [SerializeField] float MoveSpeed = 50.0f;
     [SerializeField] float RunMultiplier = 1.4f;
     [SerializeField] Vector2 RotationSpeeds = new Vector2(500.0f, 200.0f);
