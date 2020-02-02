@@ -488,6 +488,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: WaterBar
       objectReference: {fileID: 0}
+    - target: {fileID: 7917913294693893100, guid: 997b400cd3f3aa74b9217bd5b54a4770,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7917913294693893101, guid: 997b400cd3f3aa74b9217bd5b54a4770,
         type: 3}
       propertyPath: m_LocalPosition.x

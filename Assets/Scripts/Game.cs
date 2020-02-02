@@ -22,7 +22,9 @@ public class Game : MonoBehaviour
     
     public Resources Resources = null;
     public int DayNumber { get; private set; }
+
     public UnityEvent DayChangedEvent = new UnityEvent();
+    public UnityEvent ToolAquiredEvent = new UnityEvent();
 
     private Vignette mVignette;
     private float DayNightT = 0.0f;
@@ -31,7 +33,7 @@ public class Game : MonoBehaviour
     private EState mState = EState.MainGame;
 
     //list of tools picked up
-    List<string> tools;
+    public List<string> Tools;
 
     void Start()
     {
@@ -45,7 +47,7 @@ public class Game : MonoBehaviour
         mVignette.smoothness.Override(1.0f);
         mVignette.roundness.Override(1.0f);
 
-        tools = new List<string>();
+        Tools = new List<string>();
         DayNumber = 1;
     }
 
@@ -116,6 +118,6 @@ public class Game : MonoBehaviour
 
     public void AddTool (string toolName)
     {
-        tools.Add(toolName);
+        Tools.Add(toolName);
     }
 }
