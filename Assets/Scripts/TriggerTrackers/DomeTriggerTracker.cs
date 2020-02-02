@@ -5,6 +5,7 @@ using UnityEngine;
 public class DomeTriggerTracker : InsideTriggerTracker
 {
     [SerializeField] private List<Machine> Machines = null;
+    [SerializeField] private DomeLights Lights = null;
 
     public bool AreMachinesFixed = false;
 

@@ -29,6 +29,7 @@ public class Tool : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.E))
             {
                 game.AddTool(ToolName);
+                game.ToolAquiredEvent.Invoke();
                 Destroy(this.gameObject);
             }
         }

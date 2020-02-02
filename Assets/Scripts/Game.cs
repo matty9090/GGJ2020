@@ -18,32 +18,36 @@ public class Game : MonoBehaviour
     [SerializeField] private float DayNightSpeed = 0.04f;
     [SerializeField] private float OxygenReplenishSpeed = 0.1f;
     [SerializeField] private float OxygenDepletionSpeed = 0.05f;
+    [SerializeField] private float VignetteStartPercent = 0.1f;
     
     public Resources Resources = null;
     public int DayNumber { get; private set; }
-    public UnityEvent DayChangedEvent = new UnityEvent();
 
+    public UnityEvent DayChangedEvent = new UnityEvent();
+    public UnityEvent ToolAquiredEvent = new UnityEvent();
+
+    private Vignette mVignette;
     private float DayNightT = 0.0f;
 
     private enum EState { MainGame, Overview };
     private EState mState = EState.MainGame;
 
     //list of tools picked up
-    List<string> tools;
+    public List<string> Tools;
 
     void Start()
     {
         SwitchToMainGame();
         StartCoroutine(DayNightCycle());
 
-        Vignette vig;
         var pp = MainCamera.GetComponent<PostProcessVolume>();
-        pp.sharedProfile.TryGetSettings(out vig);
-        vig.intensity.Override(0.0f);
-        vig.smoothness.Override(1.0f);
-        vig.roundness.Override(1.0f);
+        pp.sharedProfile.TryGetSettings(out mVignette);
+        mVignette.enabled.Override(true);
+        mVignette.intensity.Override(0.0f);
+        mVignette.smoothness.Override(1.0f);
+        mVignette.roundness.Override(1.0f);
 
-        tools = new List<string>();
+        Tools = new List<string>();
         DayNumber = 1;
     }
 
@@ -57,12 +61,19 @@ public class Game : MonoBehaviour
                 SwitchToMainGame();
         }
 
-        if (Input.GetKeyUp(KeyCode.G))
-        {
-            StartCoroutine(GameOverSequence());
-        }
+        Resources.AddToMeter(EMeter.Oxygen, Tracker.IsInside ? OxygenReplenishSpeed : -OxygenDepletionSpeed);
 
-        Resources.AddToMeter(EMeter.Water, Tracker.IsInside ? OxygenReplenishSpeed : -OxygenDepletionSpeed);
+        float vignettePercent = Resources.GetMeter(EMeter.Oxygen) / Resources.GetCap(EMeter.Oxygen);
+
+        if (vignettePercent < VignetteStartPercent)
+        {
+            mVignette.intensity.Override(Mathf.Lerp(1.0f, 0.0f, vignettePercent / VignetteStartPercent));
+
+            if (vignettePercent <= 0.001f)
+            {
+                SceneManager.LoadScene("GameOver");
+            }
+        }
     }
 
     private void SwitchToMainGame()
@@ -81,23 +92,6 @@ public class Game : MonoBehaviour
         OverviewUI.enabled = true;
         MainCamera.enabled = false;
         OverviewCamera.enabled = true;
-    }
-
-    private IEnumerator GameOverSequence()
-    {
-        Vignette vig;
-
-        var pp = MainCamera.GetComponent<PostProcessVolume>();
-        pp.sharedProfile.TryGetSettings(out vig);
-        vig.enabled.Override(true);
-
-        while (vig.intensity < 1.0f)
-        {
-            vig.intensity.Override(vig.intensity.value + Time.deltaTime * 0.1f);
-            yield return null;
-        }
-
-        SceneManager.LoadScene("GameOver");
     }
 
     private IEnumerator DayNightCycle()
@@ -124,6 +118,16 @@ public class Game : MonoBehaviour
 
     public void AddTool (string toolName)
     {
-        tools.Add(toolName);
+        Tools.Add(toolName);
+    }
+
+    public bool CheckTool(string toolName)
+    {
+        foreach(var tool in Tools)
+        {
+            if (tool == toolName)
+                return true;
+        }
+        return false;
     }
 }

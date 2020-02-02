@@ -8,6 +8,8 @@ public class Machine : MonoBehaviour
     [SerializeField] float FixRadius = 10;
     [SerializeField] EResource ResourceType = EResource.Metal;
     [SerializeField] int ResourceCost = 10;
+    [SerializeField] string RequiredTool = "Welder";
+    [SerializeField] float TextHeightDifference = 5.0f;
 
 
     private bool _IsBroken = true;
@@ -32,7 +34,7 @@ public class Machine : MonoBehaviour
             else
             {
                 StopParticles();
-                ButtonCanvas.gameObject.SetActive(false);
+                CostText.enabled = false;
             }
         }
     }
@@ -46,7 +48,7 @@ public class Machine : MonoBehaviour
         particlesSystems = GetComponentsInChildren<ParticleSystem>();
         game = GameObject.Find("Game").GetComponent<Game>();
         ButtonCanvas = transform.Find("ButtonCanvas").GetComponent<Canvas>();
-        CostText.text = "Metal: " + ResourceCost.ToString(); 
+        CostText.text += "\nMetal: " + ResourceCost.ToString() + "\nRequires tool: " + RequiredTool;
     }
 
     // Update is called once per frame
@@ -56,10 +58,13 @@ public class Machine : MonoBehaviour
         {
             if (Vector3.Distance(PlayerChar.transform.position, transform.position) < FixRadius)
             {
-                ButtonCanvas.gameObject.SetActive(true);
-                if(game.Resources.GetRes(ResourceType) >= ResourceCost)
+                var screen = Camera.main.WorldToScreenPoint(transform.position + Vector3.up * TextHeightDifference);
+                CostText.transform.position = screen;
+                CostText.enabled = true;
+                if (game.Resources.GetRes(ResourceType) >= ResourceCost && game.CheckTool(RequiredTool))
                 {
                     CostText.color = Color.green;
+
                     if (Input.GetKeyDown(KeyCode.E))
                     {
                         IsBroken = !IsBroken;
@@ -70,7 +75,7 @@ public class Machine : MonoBehaviour
                     CostText.color = Color.red;
             }
             else
-                ButtonCanvas.gameObject.SetActive(false);
+                CostText.enabled = false;
         }  
     }
 

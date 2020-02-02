@@ -17,7 +17,7 @@ public class HarvestableObject : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        PlayerChar = GameObject.Find("Character").gameObject;
+        PlayerChar = GameObject.Find("Character");
         ButtonCanvas = transform.Find("ButtonCanvas").GetComponent<Canvas>();
     }
 
