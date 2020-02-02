@@ -9,8 +9,7 @@ public class UI : MonoBehaviour
     [SerializeField] private Transform MeterWater = null;
     [SerializeField] private Transform MeterOxygen = null;
     [SerializeField] private Gradient OxygenGradient = null;
-    [SerializeField] private TMPro.TextMeshProUGUI TxtSoil = null;
-    [SerializeField] private TMPro.TextMeshProUGUI TxtDirt = null;
+    [SerializeField] private TMPro.TextMeshProUGUI TxtWood = null;
     [SerializeField] private TMPro.TextMeshProUGUI TxtMetal = null;
 
     private void Start()
@@ -31,8 +30,7 @@ public class UI : MonoBehaviour
 
     public void OnResourcesChanged()
     {
-        TxtSoil.text = "" + Resources.GetRes(EResource.Soil);
-        TxtDirt.text = "" + Resources.GetRes(EResource.Dirt);
+        TxtWood.text = "" + Resources.GetRes(EResource.Wood);
         TxtMetal.text = "" + Resources.GetRes(EResource.Metal);
     }
 }

@@ -10,8 +10,17 @@ public class DomeLights : MonoBehaviour
     [SerializeField] private Color LightBrokenCol = Color.red;
 
     bool mIsFixed = false;
-    bool LightsOn = true;
+    public bool ShouldFlash = false;
+    private bool LightsOn = false;
     private float FlashTimer = 0.0f;
+
+    private void Start()
+    {
+        foreach (var light in Lights)
+        {
+            light.enabled = ShouldFlash;
+        }
+    }
 
     public bool IsFixed {
         set {
@@ -30,7 +39,7 @@ public class DomeLights : MonoBehaviour
 
     void Update()
     {
-        if (!IsFixed)
+        if (!IsFixed && ShouldFlash)
         {
             FlashTimer -= Time.deltaTime;
 
