@@ -31,6 +31,14 @@ public class HarvestableObject : MonoBehaviour
                 ButtonCanvas.gameObject.SetActive(true);
                 if (Input.GetKeyDown(KeyCode.E))
                 {
+                    if (HarvestedEffect != null)
+                    {
+                        ParticleSystem explosionEffect = Instantiate(HarvestedEffect) as ParticleSystem;
+                        explosionEffect.transform.position = transform.position;
+                        explosionEffect.Play();
+                        Destroy(explosionEffect.gameObject, explosionEffect.main.startLifetime.constant);
+                    }
+
                     GameObject.Find("Game").GetComponent<Game>().Resources.AddResources(ResourceType,ResourceAmount);
                     StartCoroutine(Shrink(2.0f));
                     IsHarvesting = true;
@@ -59,14 +67,4 @@ public class HarvestableObject : MonoBehaviour
         Destroy(this.gameObject); 
     }
 
-    private void OnDestroy()
-    {
-        if (HarvestedEffect != null)
-        {
-            ParticleSystem explosionEffect = Instantiate(HarvestedEffect) as ParticleSystem;
-            explosionEffect.transform.position = transform.position;
-            explosionEffect.Play();
-            Destroy(explosionEffect.gameObject, explosionEffect.main.startLifetime.constant);
-        }
-    }
 }

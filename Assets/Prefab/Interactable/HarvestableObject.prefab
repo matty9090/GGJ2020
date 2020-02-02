@@ -299,4 +299,5 @@ MonoBehaviour:
   HarvestRange: 10
   ResourceType: 1
   ResourceAmount: 5
-  HarvestedEffect: {fileID: 0}
+  HarvestedEffect: {fileID: 198748979371217952, guid: 1a365141225c22e49a7bb976869b22a8,
+    type: 3}
