@@ -53,6 +53,7 @@ public class HarvestableObject : MonoBehaviour
 
     IEnumerator Shrink(float scalingDuration)
     {
+        GetComponent<AudioSource>().Play();
         Vector3 basePosition = transform.position;
         float scaleStep = 0;
         while (scaleStep < 0.5f) 

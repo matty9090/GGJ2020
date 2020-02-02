@@ -9,6 +9,7 @@ public class Tool : MonoBehaviour
     [SerializeField] private string ToolName = "Shovel";
     GameObject PlayerChar = null;
     Canvas ButtonCanvas = null;
+    bool pickedUp = false;
     Game game = null;
 
     void Start()
@@ -26,7 +27,7 @@ public class Tool : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(PlayerChar)
+        if(PlayerChar && !pickedUp)
         {
             if (Vector3.Distance(PlayerChar.transform.position, transform.position) < PickUp)
             {
@@ -35,7 +36,8 @@ public class Tool : MonoBehaviour
                 {
                     game.AddTool(ToolName);
                     game.ToolAquiredEvent.Invoke();
-                    Destroy(this.gameObject);
+                    StartCoroutine(Shrink(2.0f));
+                    pickedUp = true;
                 }
             }
             else
@@ -43,5 +45,22 @@ public class Tool : MonoBehaviour
         }
     }
 
-    
+    IEnumerator Shrink(float scalingDuration)
+    {
+        ButtonCanvas.gameObject.SetActive(false);
+        GetComponent<AudioSource>().Play();
+        Vector3 basePosition = transform.position;
+        float scaleStep = 0;
+        while (scaleStep < 0.5f)
+        {
+            scaleStep += Time.deltaTime / scalingDuration;
+            float newScale = 1 - scaleStep;
+            transform.localScale = new Vector3(newScale, newScale, newScale);
+            transform.position = new Vector3(basePosition.x, basePosition.y - (1 - transform.localScale.y), basePosition.z);
+
+            yield return null;
+        }
+        Destroy(this.gameObject);
+    }
+
 }
