@@ -8,6 +8,8 @@ public class HarvestableObject : MonoBehaviour
     [SerializeField] EResource ResourceType = EResource.Metal;
     [SerializeField] int ResourceAmount = 5;
     [SerializeField] ParticleSystem HarvestedEffect = null;
+    [SerializeField] bool RequiresTool = false;
+    [SerializeField] string Tool = "";
 
     GameObject PlayerChar = null;
     Canvas ButtonCanvas = null;
@@ -29,19 +31,31 @@ public class HarvestableObject : MonoBehaviour
             if(Vector3.Distance(PlayerChar.transform.position, transform.position) < HarvestRange)
             {
                 ButtonCanvas.gameObject.SetActive(true);
+                
                 if (Input.GetKeyDown(KeyCode.E))
                 {
-                    if (HarvestedEffect != null)
+                    var game = GameObject.Find("Game").GetComponent<Game>();
+                    bool canHarvest = true;
+
+                    if (RequiresTool)
                     {
-                        ParticleSystem explosionEffect = Instantiate(HarvestedEffect) as ParticleSystem;
-                        explosionEffect.transform.position = transform.position;
-                        explosionEffect.Play();
-                        Destroy(explosionEffect.gameObject, explosionEffect.main.startLifetime.constant);
+                        canHarvest = game.Tools.Contains(Tool);
                     }
 
-                    GameObject.Find("Game").GetComponent<Game>().Resources.AddResources(ResourceType,ResourceAmount);
-                    StartCoroutine(Shrink(2.0f));
-                    IsHarvesting = true;
+                    if (canHarvest)
+                    {
+                        if (HarvestedEffect != null)
+                        {
+                            ParticleSystem explosionEffect = Instantiate(HarvestedEffect) as ParticleSystem;
+                            explosionEffect.transform.position = transform.position;
+                            explosionEffect.Play();
+                            Destroy(explosionEffect.gameObject, explosionEffect.main.startLifetime.constant);
+                        }
+
+                        game.Resources.AddResources(ResourceType, ResourceAmount);
+                        StartCoroutine(Shrink(2.0f));
+                        IsHarvesting = true;
+                    }
                 }
             }
             else

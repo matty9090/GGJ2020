@@ -24,6 +24,11 @@ public class DomeTriggerTracker : InsideTriggerTracker
             }
         }
 
+        if (!AreMachinesFixed)
+        {
+            GameObject.Find("Game").GetComponent<Game>().DomesFinished++;
+        }
+
         AreMachinesFixed = true;
         IsPlayerInside = true;
         Lights.IsFixed = true;
@@ -37,6 +42,11 @@ public class DomeTriggerTracker : InsideTriggerTracker
             {
                 return;
             }
+        }
+
+        if (!AreMachinesFixed)
+        {
+            GameObject.Find("Game").GetComponent<Game>().DomesFinished++;
         }
 
         AreMachinesFixed = true;

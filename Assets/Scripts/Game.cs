@@ -22,11 +22,23 @@ public class Game : MonoBehaviour
     
     public Resources Resources = null;
     public int DayNumber { get; private set; }
+    
+    public int DomesFinished {
+        get {
+            return mDomesFinished;
+        }
+        set {
+            mDomesFinished = value;
+            DomeFinishedEvent.Invoke();
+        }
+    }
 
     public UnityEvent DayChangedEvent = new UnityEvent();
     public UnityEvent ToolAquiredEvent = new UnityEvent();
+    public UnityEvent DomeFinishedEvent = new UnityEvent();
 
     private Vignette mVignette;
+    public int mDomesFinished = 0;
     private float DayNightT = 0.0f;
 
     public enum EState { MainGame, Overview };

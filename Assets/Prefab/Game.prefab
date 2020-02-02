@@ -79,7 +79,7 @@ MonoBehaviour:
     m_NumAlphaKeys: 2
   LightRotator: {fileID: 0}
   Tracker: {fileID: 0}
-  DayNightSpeed: 0.002
+  DayNightSpeed: 0.008
   OxygenReplenishSpeed: 0.1
   OxygenDepletionSpeed: 0.005
   VignetteStartPercent: 1
@@ -90,4 +90,5 @@ MonoBehaviour:
   ToolAquiredEvent:
     m_PersistentCalls:
       m_Calls: []
+  mState: 0
   Tools: []

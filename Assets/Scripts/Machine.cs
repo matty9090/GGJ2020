@@ -11,7 +11,6 @@ public class Machine : MonoBehaviour
     [SerializeField] string RequiredTool = "Welder";
     [SerializeField] float TextHeightDifference = 5.0f;
 
-
     private bool _IsBroken = true;
 
     GameObject PlayerChar = null;
