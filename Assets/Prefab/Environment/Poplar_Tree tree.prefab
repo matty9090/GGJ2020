@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7193519529558378961}
   - component: {fileID: 8167397777671054624}
   m_Layer: 0
-  m_Name: Poplar_Tree
+  m_Name: Poplar_Tree tree
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
