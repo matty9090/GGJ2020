@@ -919,20 +919,30 @@ PrefabInstance:
       propertyPath: Tracker
       value: 
       objectReference: {fileID: 5420480071909669333}
+    - target: {fileID: 8580011942982728833, guid: 504637090b32b6244899d6decb7a646e,
+        type: 3}
+      propertyPath: OxygenDepletionSpeed
+      value: 0.005
+      objectReference: {fileID: 0}
+    - target: {fileID: 8580011942982728833, guid: 504637090b32b6244899d6decb7a646e,
+        type: 3}
+      propertyPath: VignetteStartPercent
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8580011942982728862, guid: 504637090b32b6244899d6decb7a646e,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 59.07662
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8580011942982728862, guid: 504637090b32b6244899d6decb7a646e,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 54.053448
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8580011942982728862, guid: 504637090b32b6244899d6decb7a646e,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -180.09355
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8580011942982728862, guid: 504637090b32b6244899d6decb7a646e,
         type: 3}
