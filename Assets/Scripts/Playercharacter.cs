@@ -15,6 +15,7 @@ public class Playercharacter : MonoBehaviour
 
     float yRotation = 0;
 
+    bool walking = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,7 +26,6 @@ public class Playercharacter : MonoBehaviour
     void Update()
     {
         Vector3 vel = Vector3.zero;
-
         // Player controls  
         if (Input.GetKey(KeyCode.W))
             vel += transform.forward * MoveSpeed * Time.deltaTime;
@@ -47,6 +47,19 @@ public class Playercharacter : MonoBehaviour
         }
 
         transform.position += vel;
+        if (vel.magnitude > 0.01 )
+        {
+            if(!walking)
+            {
+                GetComponent<AudioSource>().Play();
+                walking = true;
+            }
+        }
+        else
+        {
+            GetComponent<AudioSource>().Stop();
+            walking = false;
+        }
 
         // Rotation
         float turnAmountX = Input.GetAxis("Mouse X") * Time.deltaTime * RotationSpeeds.x;
