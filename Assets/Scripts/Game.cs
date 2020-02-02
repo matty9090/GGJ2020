@@ -29,8 +29,8 @@ public class Game : MonoBehaviour
     private Vignette mVignette;
     private float DayNightT = 0.0f;
 
-    private enum EState { MainGame, Overview };
-    private EState mState = EState.MainGame;
+    public enum EState { MainGame, Overview };
+    public EState mState = EState.MainGame;
 
     //list of tools picked up
     public List<string> Tools;

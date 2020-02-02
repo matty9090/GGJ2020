@@ -24,7 +24,7 @@ public class HarvestableObject : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(!IsHarvesting)
+        if(!IsHarvesting && PlayerChar)
         {
             if(Vector3.Distance(PlayerChar.transform.position, transform.position) < HarvestRange)
             {

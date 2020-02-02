@@ -20,14 +20,17 @@ public class Door : MonoBehaviour
     private void Start()
     {
         RestPos = transform.position;
-        PlayerChar = GameObject.Find("Character").gameObject;
-        mGame = GameObject.Find("Game").GetComponent<Game>();
+        PlayerChar = GameObject.Find("Character");
+        var tmpGame = GameObject.Find("Game");
+        if (tmpGame)
+            mGame = tmpGame.GetComponent<Game>();
         Text.text += "\nMetal: " + ResourceCost.ToString() + "\nRequires tool: " + RequiredTool;
+        Text.enabled = false;
     }
 
     private void Update()
     {
-        if (Vector3.Distance(PlayerChar.transform.position, transform.position) < TipRange && !IsFixed)
+        if (PlayerChar && Vector3.Distance(PlayerChar.transform.position, transform.position) < TipRange && !IsFixed)
         {
             var screen = Camera.main.WorldToScreenPoint(transform.position);
             Text.transform.position = screen;
