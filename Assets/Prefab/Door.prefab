@@ -111,6 +111,10 @@ MonoBehaviour:
   Text: {fileID: 913292710796602235}
   DoorSpeed: 40
   DoorHeight: 10
+  TipRange: 10
+  ResourceType: 2
+  ResourceCost: 10
+  RequiredTool: Welder
 --- !u!65 &8929684705984246250
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -156,10 +160,10 @@ RectTransform:
   m_Father: {fileID: 8499642759571206443}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.0000179708, y: 0.00002926588}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7004600953625263706
 CanvasRenderer:
@@ -232,7 +236,7 @@ MonoBehaviour:
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: 13
+  m_firstOverflowCharacterIndex: -1
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
   m_isTextTruncated: 0
@@ -261,7 +265,7 @@ MonoBehaviour:
     spaceCount: 3
     wordCount: 4
     linkCount: 0
-    lineCount: 2
+    lineCount: 1
     pageCount: 1
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0

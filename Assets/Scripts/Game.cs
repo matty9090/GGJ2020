@@ -120,4 +120,14 @@ public class Game : MonoBehaviour
     {
         Tools.Add(toolName);
     }
+
+    public bool CheckTool(string toolName)
+    {
+        foreach(var tool in Tools)
+        {
+            if (tool == toolName)
+                return true;
+        }
+        return false;
+    }
 }

@@ -10,6 +10,7 @@ public class Door : MonoBehaviour
     [SerializeField] private float TipRange = 10.0f;
     [SerializeField] EResource ResourceType = EResource.Metal;
     [SerializeField] int ResourceCost = 10;
+    [SerializeField] string RequiredTool = "Welder";
 
     bool HasExited = false, IsFixed = false;
     private Vector3 RestPos = Vector3.zero;
@@ -21,7 +22,7 @@ public class Door : MonoBehaviour
         RestPos = transform.position;
         PlayerChar = GameObject.Find("Character").gameObject;
         mGame = GameObject.Find("Game").GetComponent<Game>();
-        Text.text += "\nMetal: " + ResourceCost.ToString();
+        Text.text += "\nMetal: " + ResourceCost.ToString() + "\nRequires tool: " + RequiredTool;
     }
 
     private void Update()
@@ -32,7 +33,7 @@ public class Door : MonoBehaviour
             Text.transform.position = screen;
             Text.enabled = true;
 
-            if (mGame.Resources.GetRes(ResourceType) >= ResourceCost)
+            if (mGame.Resources.GetRes(ResourceType) >= ResourceCost && mGame.CheckTool(RequiredTool))
             {
                 Text.color = Color.green;
 
