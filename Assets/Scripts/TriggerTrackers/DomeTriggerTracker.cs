@@ -11,6 +11,11 @@ public class DomeTriggerTracker : InsideTriggerTracker
 
     private void OnTriggerStay(Collider other)
     {
+        if (!Machines[0].IsBroken)
+        {
+            Lights.ShouldFlash = true;
+        }
+
         foreach (var machine in Machines)
         {
             if (machine.IsBroken)
@@ -21,6 +26,7 @@ public class DomeTriggerTracker : InsideTriggerTracker
 
         AreMachinesFixed = true;
         IsPlayerInside = true;
+        Lights.IsFixed = true;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -35,6 +41,7 @@ public class DomeTriggerTracker : InsideTriggerTracker
 
         AreMachinesFixed = true;
         IsPlayerInside = true;
+        Lights.IsFixed = true;
     }
 
     private void OnTriggerExit(Collider other)
